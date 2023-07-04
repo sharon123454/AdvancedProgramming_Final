@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "823012855058",
+    "project_id": "advancedprogrammingfinal-8d879",
+    "storage_bucket": "advancedprogrammingfinal-8d879.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:823012855058:android:71119101e6ac1e8ea1f7cb",
+        "android_client_info": {
+          "package_name": "com.DefaultCompany.Final_Advanced_Programming"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "823012855058-rb2oiavdb4aucsikqjjrpfdl9t0uh1e2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOMCYqplyI4g6d6cEqXaC6MgJSw7xN9CY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "823012855058-rb2oiavdb4aucsikqjjrpfdl9t0uh1e2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
