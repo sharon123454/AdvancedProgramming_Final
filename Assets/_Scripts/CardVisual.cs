@@ -20,7 +20,7 @@ public class CardVisual : MonoBehaviour
         if (card.image)
         {
             artworkImage.sprite = card.image;
-            artworkImage.SetNativeSize();
+            //artworkImage.SetNativeSize();
         }
     }
 }

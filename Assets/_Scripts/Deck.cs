@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Deck : MonoBehaviour
 {
-    public Deck instance;
+    public static Deck instance;
 
     [SerializeField] private List<Card> availableCards;
 
@@ -25,6 +25,7 @@ public class Deck : MonoBehaviour
             Card card = availableCards[rand];
             availableCards.Remove(card);
 
+            Debug.Log("Got card");
             return card;
         }
         else

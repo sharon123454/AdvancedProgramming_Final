@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 600124d725f9bd144827bf6ed2baf926, type: 3}
   m_Name: SO_Luffy
   m_EditorClassIdentifier: 
-  name: MONKEY.D.LUFFY
+  name: "MONKEY\u2022D\u2022LUFFY"
   image: {fileID: -70464499, guid: b07a40d743f53ee4e8c4a1822589bf94, type: 3}
   number: 1500500500
