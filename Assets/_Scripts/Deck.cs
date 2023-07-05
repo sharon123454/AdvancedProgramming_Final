@@ -25,7 +25,7 @@ public class Deck : MonoBehaviour
             Card card = availableCards[rand];
             availableCards.Remove(card);
 
-            Debug.Log("Got card");
+            Debug.Log("Card Drawn");
             return card;
         }
         else
@@ -33,6 +33,27 @@ public class Deck : MonoBehaviour
             Debug.Log("Deck is out of Cards");
             return null;
         }
+    }
+
+    public Card DrawCardByName(string name)
+    {
+        foreach (Card card in availableCards)
+        {
+            if (card.name == name)
+            {
+                StartCoroutine(RemoveCardDelayed(card));
+                return card;
+            }
+        }
+
+        return null;
+    }
+
+    IEnumerator RemoveCardDelayed(Card cardDrawn)
+    {
+        yield return null;
+        yield return null;
+        availableCards.Remove(cardDrawn);
     }
 
 }
