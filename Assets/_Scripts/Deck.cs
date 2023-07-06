@@ -26,7 +26,7 @@ public class Deck : MonoBehaviour
             Card card = availableCards[rand];
             availableCards.Remove(card);
 
-            Debug.Log($"Card {card.name} was drawn");
+            //Debug.Log($"Card {card.name} was drawn");
             return card;
         }
         else

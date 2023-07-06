@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
-using TMPro;
 
 public class Hand : MonoBehaviour
 {
@@ -11,6 +10,7 @@ public class Hand : MonoBehaviour
     [SerializeField] private RectTransform[] _handPositions;
 
     private Queue<CardVisual> _cardVisualQueue = new Queue<CardVisual>();
+    private List<string> _handData = new List<string>();
 
     private void Awake()
     {
@@ -20,6 +20,7 @@ public class Hand : MonoBehaviour
         instance = this;
     }
 
+    public List<string> GetHandData() { return _handData; }
     public void FillHand()
     {
         for (int i = 0; i < _handPositions.Length; i++)
@@ -53,6 +54,7 @@ public class Hand : MonoBehaviour
                 // pulls first card from queue and destroying it
                 CardVisual cardVisual = _cardVisualQueue.Dequeue();
                 Destroy(cardVisual.gameObject);
+                _handData.Remove(card.name);
 
                 //// Move all card positions in hand (should find a solution im losing references)
                 Queue<CardVisual> tempQueue = new Queue<CardVisual>();
@@ -71,6 +73,7 @@ public class Hand : MonoBehaviour
             CardVisual newCard = Instantiate(_cardVisualPrefab, _handPositions[_cardVisualQueue.Count]);
             newCard.card = card;
             _cardVisualQueue.Enqueue(newCard);
+            _handData.Add(card.name);
         }
     }
 
