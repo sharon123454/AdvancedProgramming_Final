@@ -16,6 +16,7 @@ public class Deck : MonoBehaviour
         instance = this;
     }
 
+    public int GetDeckAmount() { return availableCards.Count; }
     public Card DrawCard()
     {
         if (availableCards.Count > 0)
@@ -25,7 +26,7 @@ public class Deck : MonoBehaviour
             Card card = availableCards[rand];
             availableCards.Remove(card);
 
-            Debug.Log("Card Drawn");
+            Debug.Log($"Card {card.name} was drawn");
             return card;
         }
         else
@@ -41,6 +42,7 @@ public class Deck : MonoBehaviour
         {
             if (card.name == name)
             {
+                //delaying card removal as I cant remove an object in the list which it exists
                 StartCoroutine(RemoveCardDelayed(card));
                 return card;
             }
@@ -51,7 +53,6 @@ public class Deck : MonoBehaviour
 
     IEnumerator RemoveCardDelayed(Card cardDrawn)
     {
-        yield return null;
         yield return null;
         availableCards.Remove(cardDrawn);
     }

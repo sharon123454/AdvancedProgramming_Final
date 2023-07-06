@@ -5,32 +5,74 @@ using TMPro;
 
 public class Hand : MonoBehaviour
 {
-    [SerializeField] private CardVisual cardVisualPrefab;
-    [SerializeField] private RectTransform[] cardPositions;
-    [SerializeField] private int handSize;
+    public static Hand instance;
 
-    List<Card> cardList = new List<Card>();
-    List<CardVisual> cardVisualList = new List<CardVisual>();
+    [SerializeField] private CardVisual _cardVisualPrefab;
+    [SerializeField] private RectTransform[] _handPositions;
+
+    private Queue<CardVisual> _cardVisualQueue = new Queue<CardVisual>();
+
+    private void Awake()
+    {
+        if (instance && instance != this)
+            Destroy(gameObject);
+
+        instance = this;
+    }
 
     public void FillHand()
     {
-        for (int i = 0; i < handSize; i++)
+        //for (int i = 0; i < _handPositions.Length; i++)
+            DrawCard();
+    }
+    public void LoadHand(List<string> cardNamesInHand)
+    {
+        foreach (string cardName in cardNamesInHand)
+        {
+            Card card = Deck.instance.DrawCardByName(cardName);
+            if (!card) return;
+
+            // Creating new card
+            CardVisual newCard = Instantiate(_cardVisualPrefab, _handPositions[_cardVisualQueue.Count]);
+            newCard.card = card;
+            _cardVisualQueue.Enqueue(newCard);
+        }
+    }
+
+    private void DrawCard()
+    {
+        // Checking if Deck isn't empty
+        if (Deck.instance.GetDeckAmount() > 0)
         {
             Card card = Deck.instance.DrawCard();
             if (!card) return;
 
-            if (cardVisualList.Count >= handSize)
+            // if amount of existing cards bigger/equal then slots in hand
+            if (_cardVisualQueue.Count >= _handPositions.Length)
             {
-                CardVisual cardVisual = cardVisualList[i];
-                cardVisualList.Remove(cardVisual);
+                // pulls first card from queue and destroying it
+                CardVisual cardVisual = _cardVisualQueue.Dequeue();
                 Destroy(cardVisual);
-                cardList.RemoveAt(i);
+
+                //// Move all card positions in hand (should find a solution im losing references)
+                
+                //Queue<CardVisual> tempQueue = new Queue<CardVisual>();
+                //for (int i = 0; i < _cardVisualQueue.Count; i++)
+                //{
+                //    cardVisual = _cardVisualQueue.Dequeue();
+                //    cardVisual.transform.SetParent(_handPositions[i]);
+                //    cardVisual.transform.position = Vector3.zero;
+                //    tempQueue.Enqueue(cardVisual);
+                //}
+                //_cardVisualQueue = tempQueue;
             }
 
-            cardList.Add(card);
-            CardVisual newCard = Instantiate(cardVisualPrefab, cardPositions[i]);
-            newCard.card = cardList[i];
-            cardVisualList.Add(newCard);
+            // Creating new card
+            CardVisual newCard = Instantiate(_cardVisualPrefab, _handPositions[_cardVisualQueue.Count]);
+            newCard.card = card;
+            _cardVisualQueue.Enqueue(newCard);
         }
+
     }
+
 }
