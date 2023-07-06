@@ -37,6 +37,7 @@ public class Hand : MonoBehaviour
             CardVisual newCard = Instantiate(_cardVisualPrefab, _handPositions[_cardVisualQueue.Count]);
             newCard.card = card;
             _cardVisualQueue.Enqueue(newCard);
+            _handData.Add(card.name);
         }
     }
 
