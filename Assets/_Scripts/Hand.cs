@@ -22,7 +22,7 @@ public class Hand : MonoBehaviour
 
     public void FillHand()
     {
-        //for (int i = 0; i < _handPositions.Length; i++)
+        for (int i = 0; i < _handPositions.Length; i++)
             DrawCard();
     }
     public void LoadHand(List<string> cardNamesInHand)
@@ -39,7 +39,7 @@ public class Hand : MonoBehaviour
         }
     }
 
-    private void DrawCard()
+    public void DrawCard()
     {
         // Checking if Deck isn't empty
         if (Deck.instance.GetDeckAmount() > 0)
@@ -52,19 +52,19 @@ public class Hand : MonoBehaviour
             {
                 // pulls first card from queue and destroying it
                 CardVisual cardVisual = _cardVisualQueue.Dequeue();
-                Destroy(cardVisual);
+                Destroy(cardVisual.gameObject);
 
                 //// Move all card positions in hand (should find a solution im losing references)
-                
-                //Queue<CardVisual> tempQueue = new Queue<CardVisual>();
-                //for (int i = 0; i < _cardVisualQueue.Count; i++)
-                //{
-                //    cardVisual = _cardVisualQueue.Dequeue();
-                //    cardVisual.transform.SetParent(_handPositions[i]);
-                //    cardVisual.transform.position = Vector3.zero;
-                //    tempQueue.Enqueue(cardVisual);
-                //}
-                //_cardVisualQueue = tempQueue;
+                Queue<CardVisual> tempQueue = new Queue<CardVisual>();
+                for (int i = 0; i < _handPositions.Length - 1; i++)
+                {
+                    cardVisual = _cardVisualQueue.Dequeue();
+                    cardVisual.transform.SetParent(_handPositions[i]);
+                    cardVisual.transform.localPosition = Vector3.zero;
+                    tempQueue.Enqueue(cardVisual);
+                }
+
+                _cardVisualQueue = tempQueue;
             }
 
             // Creating new card
@@ -72,7 +72,6 @@ public class Hand : MonoBehaviour
             newCard.card = card;
             _cardVisualQueue.Enqueue(newCard);
         }
-
     }
 
 }

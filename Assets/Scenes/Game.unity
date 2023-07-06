@@ -717,7 +717,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 735630078}
         m_TargetAssemblyTypeName: Hand, Assembly-CSharp
-        m_MethodName: FillHand
+        m_MethodName: DrawCard
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
